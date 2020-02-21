@@ -1,0 +1,383 @@
+select * from report_master where id in ( select report_master_id from report_parameter where component_id =47);
+
+select value AS created_date  from etl_concept where key ='inpatient_log_last_sync_transaction_time';
+update etl_concept set value = '2019-04-23T04:07:48.372' where key ='inpatient_log_last_sync_transaction_time';
+select value from etl_concept where key ='inpatient_log_last_sync_id';
+update etl_concept set value = '14' where key ='inpatient_log_last_sync_id';
+select * from etl_ot_request ;
+
+update etl_concept set value='2000-08-17T04:07:48.372' where key='ot_request_last_sync_transaction_time';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='ot_request_last_sync_time';
+update etl_concept set value='0' where key='ot_request_last_sync_id';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='surgery_pac_last_sync_transaction_time';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='surgery_pac_last_sync_time';
+update etl_concept set value='0' where key='surgery_pac_last_sync_id';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='surgery_detail_last_sync_transaction_time';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='surgery_detail_last_sync_time';
+update etl_concept set value='0' where key='surgery_detail_last_sync_id';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='surgery_billing_last_sync_transaction_time';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='surgery_billing_last_sync_time';
+update etl_concept set value='0' where key='surgery_billing_last_sync_id';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='work_pattern_last_sync_transaction_time';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='work_pattern_last_sync_time';
+update etl_concept set value='0' where key='work_pattern_last_sync_id';
+
+
+
+select * from etl_concept where key in ('ot_request_last_sync_time','surgery_pac_last_sync_time','surgery_detail_last_sync_time','work_pattern_last_sync_time','surgery_billing_last_sync_time');
+
+select id,
+each_attribute -> 'type' as type,
+each_attribute -> 'locality' as locality,
+each_attribute -> 'city' as city,
+each_attribute -> 'district' as district,
+each_attribute -> 'street' as street,
+each_attribute -> 'houseNo' as houseNo,
+each_attribute -> 'state' as state,
+each_attribute -> 'country' as country,
+each_attribute -> 'pincode' as pincode
+from patient t cross join jsonb_array_elements(t.data -> 'address') each_attribute  
+where t.id in (5739255,5739256,5739257,5739267,5739258,5739259,5739260,5739261,5739262,5739263)
+
+UPDATE admission_discharge_report adm
+SET phone_no=pat.mobile_no
+FROM (SELECT mrn,mobile_no
+      FROM etl_patients_registration where mrn = '17540000204541' and mobile_no is not null limit 1)  AS pat
+WHERE adm.patient_mrn=pat.mrn;
+
+update etl_concept set value='2000-08-17T04:07:48.372' where key='work_pattern_last_sync_transaction_time';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='work_pattern_last_sync_time';
+update etl_concept set value='0' where key='work_pattern_last_sync_id';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='surgery_pac_last_sync_transaction_time';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='surgery_pac_last_sync_time';
+update etl_concept set value='0' where key='surgery_pac_last_sync_id';
+
+
+INSERT INTO etl_concept (key, value)  
+VALUES ('patients_offset_count','0'); 
+
+INSERT INTO etl_concept (key, value) VALUES ('service_order_last_sync_modified_time','2000-08-17T04:07:48.372'); 
+
+INSERT INTO etl_concept (key, value)  
+VALUES ('service_order_last_sync_created_time','2000-08-17T04:07:48.372'); 
+
+update etl_concept set value='2000-08-17T04:07:48.372' where key='service_order_last_sync_created_time';
+
+INSERT INTO etl_concept (key, value)  
+VALUES ('consultation_last_mismatch_check_id','0'); 
+
+INSERT INTO etl_concept (key, value)  
+VALUES ('appointment_last_mismatch_check_id','0'); 
+
+INSERT INTO etl_concept (key, value)  
+VALUES ('consultation_missing_count','0'); 
+
+INSERT INTO etl_concept (key, value)  
+VALUES ('appointment_missing_count','0'); 
+
+INSERT INTO etl_concept (key, value)  
+VALUES ('consultation_mismatch_ids','0');
+
+INSERT INTO etl_concept (key, value)  
+VALUES ('appointment_mismatch_ids','0'); 
+
+
+INSERT INTO etl_concept (key, value)  
+VALUES ('doctor_unavailability_missing_id','0'); 
+
+INSERT INTO etl_concept (key, value)  
+VALUES ('doctor_unavailability_missing_count','0');
+
+SELECT * from etl_concept  where key in ('consultation_last_mismatch_check_id','appointment_last_mismatch_check_id','consultation_missing_count','appointment_missing_count',
+ 'consultation_mismatch_ids','appointment_mismatch_ids','consultation_missing_ids','appointment_missing_ids');
+
+ 
+ 
+DELETE FROM etl_concept where key in ('consultation_last_mismatch_check_id','appointment_last_mismatch_check_id','consultation_missing_count','appointment_missing_count',
+ 'consultation_missing_ids','appointment_missing_ids');
+ 
+ 
+select  distinct on (service_id,tariff_category_value_id,tariff_class_id) tariff_class_id,document_id as documentId,start_date,unit_id as unitId,unit_code as unitCode,unit_name as unitName,
+tariff_category as tariffCategory,
+service_id as serviceId,service_code as serviceCode,service_name as serviceName,
+package_id as packageId,package_code as packageCode,package_name as packageName,
+tariff_category_value_id as tariffCategoryValueId,tariff_category_value_code as tariffCategoryValueCode,tariff_category_value_name as tariffCategoryValueName,
+service_type_name as serviceTypeName,
+tariff_class_code as tariffClassCode,tariff_class_name as tariffClassName,
+tariff_value as tariffValue, 
+service_package_type as servicePackageType from etl_tariff 
+where unit_code = '1754'  and service_package_type = 'Service' and service_code = 'SVC000212' and
+tariff_category = 'DEPARTMENT' and start_date <= TO_TIMESTAMP('2019-11-23 23:59:59', 'YYYY/MM/DD HH24:MI:SS')
+ and (end_date is null or end_date> TO_TIMESTAMP('2019-11-22 23:59:59', 'YYYY/MM/DD HH24:MI:SS')) 
+ order by service_id,tariff_category_value_id,tariff_class_id,start_date desc
+
+ 
+ SELECT  "etl_op_report_doctor_unavailability"."consultant_name","etl_op_report_doctor_unavailability"."from_date","etl_op_report_doctor_unavailability"."to_date",
+     "etl_op_report_doctor_unavailability"."from_time","etl_op_report_doctor_unavailability"."to_time"
+FROM "etl_op_report_doctor_unavailability"
+WHERE not ("etl_op_report_doctor_unavailability"."to_date" < to_date('2020-02-14', 'yyyy-mm-dd')
+or "etl_op_report_doctor_unavailability"."from_date"  > to_date('2020-02-14', 'yyyy-mm-dd'))
+AND "etl_op_report_doctor_unavailability"."unit_code"= '1001'
+order by "etl_op_report_doctor_unavailability"."document_id" asc
+
+
+ SELECT  "etl_op_report_doctor_unavailability"."consultant_name","etl_op_report_doctor_unavailability"."from_date","etl_op_report_doctor_unavailability"."to_date",
+     "etl_op_report_doctor_unavailability"."from_time","etl_op_report_doctor_unavailability"."to_time"
+FROM "etl_op_report_doctor_unavailability"
+WHERE  ("etl_op_report_doctor_unavailability"."to_date" >= to_date('2020-02-14', 'yyyy-mm-dd')
+or "etl_op_report_doctor_unavailability"."from_date"  <= to_date('2020-02-14', 'yyyy-mm-dd'))
+AND "etl_op_report_doctor_unavailability"."unit_code"= '1001'
+order by "etl_op_report_doctor_unavailability"."document_id" asc
+
+ SELECT
+     "etl_op_report_doctor_unavailability"."consultant_name",
+     "etl_op_report_doctor_unavailability"."from_date",
+     "etl_op_report_doctor_unavailability"."to_date",
+     "etl_op_report_doctor_unavailability"."from_time",
+     "etl_op_report_doctor_unavailability"."to_time",
+     "etl_op_report_doctor_unavailability"."unit_code",
+     "etl_op_report_doctor_unavailability"."reason" ,
+     case
+     when etl_op_report_doctor_unavailability.type = 'BLOCKING_REQUEST'
+     THEN 'BLOCK'
+     when etl_op_report_doctor_unavailability.type = 'UN_BLOCKING_REQUEST'
+     THEN 'UNBLOCK'
+     else ''
+     end as type   
+FROM     "etl_op_report_doctor_unavailability"
+  WHERE  
+ ( '2020-02-13' BETWEEN "etl_op_report_doctor_unavailability"."from_date" AND "etl_op_report_doctor_unavailability"."to_date" 
+  OR
+  '2020-02-14' BETWEEN "etl_op_report_doctor_unavailability"."from_date"  AND "etl_op_report_doctor_unavailability"."to_date")
+  -- ('2020-02-13','2020-02-13') overlaps ("etl_op_report_doctor_unavailability"."from_date" , "etl_op_report_doctor_unavailability"."to_date")
+
+  AND    "etl_op_report_doctor_unavailability"."unit_code"= '1001'
+  order by "etl_op_report_doctor_unavailability"."document_id" asc;
+
+UPDATE etl_int_tariff SET process_flag = 'N' 
+
+WHERE document_id IN
+    (SELECT id
+    FROM 
+        (SELECT document_id AS id,
+         ROW_NUMBER() OVER( PARTITION BY document_id
+        ORDER BY  document_id ) AS row_num
+        FROM etl_tariff ) t
+        WHERE t.row_num > 1 );
+ 
+ 
+ DELETE FROM etl_tariff
+WHERE document_id IN
+    (SELECT id
+    FROM 
+        (SELECT document_id AS id,
+         ROW_NUMBER() OVER( PARTITION BY document_id
+        ORDER BY  document_id ) AS row_num
+        FROM etl_tariff ) t
+        WHERE t.row_num > 1 );
+		
+
+
+DELETE FROM etl_tariff
+WHERE (document_id,CTID) IN
+    (SELECT id,CTID 
+    FROM 
+        (SELECT document_id AS id,CTID ,
+         ROW_NUMBER() OVER( PARTITION BY document_id
+        ORDER BY  document_id ) AS row_num
+        FROM etl_tariff ) t
+        WHERE t.row_num > 1 );
+		
+
+
+SELECT document_id ,INVOICE_number,pharmacy_process_flag from etl_int_ambinvoice i where pharmacy_process_flag is null 
+ and  exists (SELECT 1 from etl_invoice p where type = 'ITEM' AND source_type = 'AMB_INVOICE' and 
+p.INVOICE_id = i.document_id) order by document_id
+
+WITH
+  t1(v1, v2) AS (SELECT * from surgery_completion_report ),
+  t2(w1, w2) AS (
+   SELECT * from surgery_list_report     
+  )
+SELECT *
+FROM t1, t2 limit 10
+
+
+
+WITH RECURSIVE t(v) AS (
+  SELECT 1     -- Seed Row
+  UNION ALL
+  SELECT v + 1 -- Recursion
+  FROM t
+)
+SELECT v
+FROM t
+LIMIT 5
+
+with t1(v1) as (select * from (SELECT * FROM dblink('hostaddr=172.23.29.5 port=5432 dbname=pharmacy_db user=support password=support0987', 
+'select id from invoice where id >= 0 AND id < 300000') as t(id bigint)) a ) 
+select distinct invoice_id from etl_invoice where source_type = 'PHR_INVOICE' and invoice_id < 300000 and invoice_id not in (SELECT v1 FROM t1);
+
+WITH RECURSIVE t(v,s) AS (
+  SELECT 1 ,3    -- Seed Row
+  UNION ALL
+  SELECT v + 1,s -- Recursion
+  FROM t
+)
+SELECT v,s
+FROM t
+LIMIT 5
+
+
+
+WITH RECURSIVE q(r, i, rx, ix, g) AS (
+  SELECT r::DOUBLE PRECISION * 0.02, i::DOUBLE PRECISION * 0.02, 
+        .0::DOUBLE PRECISION      , .0::DOUBLE PRECISION, 0
+  FROM generate_series(-60, 20) r, generate_series(-50, 50) i
+  UNION ALL
+  SELECT r, i, CASE WHEN abs(rx * rx + ix * ix) &amp;amp;lt;= 2 THEN rx * rx - ix * ix END + r, 
+               CASE WHEN abs(rx * rx + ix * ix) &amp;amp;lt;= 2 THEN 2 * rx * ix END + i, g + 1
+  FROM q
+  WHERE rx IS NOT NULL AND g &amp;amp;lt; 99
+)
+SELECT array_to_string(array_agg(s ORDER BY r), '')
+FROM (
+  SELECT i, r, substring(' .:-=+*#%@', max(g) / 10 + 1, 1) s
+  FROM q
+  GROUP BY i, r
+) q
+GROUP BY i
+ORDER BY i
+
+
+SELECT * from databasechangelog order by dateexecuted desc limit 10;
+
+
+SELECT * from ot_utilization_report;
+
+select * from patient_transfer_report ;
+SELECT distinct ward_code,ward_name from etl_inpatients 
+select * from report_master where name like '%Patient%'
+select * from report_master where code = '103121';
+
+SELECT * from report_parameter_comp where name like 'ServiceItem%';
+select *  from report_master where code = '103121'
+SELECT * from report_parameter_comp where id = 70
+SELECT * from report_parameter where component_id  = 70
+select * from report_master where name like '%Surgery%'
+select * from report_master where code = '108105';
+
+
+SELECT * from report_parameter_comp where name like 'Surger%';
+SELECT * from report_parameter where report_master_id   = 61
+select * from report_master where name like '%Surgery%'
+select * from report_master where code = '108105';
+
+SELECT * from report_parameter where report_master_id  =42
+2019-07-25T12:46:20.099
+update etl_concept set value='2019-01-25T04:07:48.372' where key='inpatients_last_sync_transaction_time';
+update etl_concept set value='2019-01-25T04:07:48.372' where key='inpatients_last_sync_time';
+update etl_concept set value='500' where key='inpatients_last_sync_id';
+
+
+update etl_concept set value='2019-01-25T04:07:48.372' where key='discharge_last_sync_transaction_time';
+update etl_concept set value='2019-01-25T04:07:48.372' where key='discharge_last_sync_time';
+update etl_concept set value='500' where key='discharge_last_sync_id';
+
+
+
+update etl_concept set value='2019-07-2-01T04:07:48.372' where key='etl_invoice_services_inside_package_last_sync_transaction_time';
+update etl_concept set value='2019-01-25T04:07:48.372' where key='discharge_last_sync_time';
+update etl_concept set value='500' where key='discharge_last_sync_id';
+
+SELECT * from databasechangelog  where id = '2019080919190000_added_column_package_name' limit 1;
+
+
+
+update etl_concept set value='2019-07-28T04:07:48.372' where key='ot_request_last_sync_transaction_time';
+update etl_concept set value='2019-07-28T04:07:48.372' where key='ot_request_last_sync_time';
+update etl_concept set value='0' where key='ot_request_last_sync_id';
+update etl_concept set value='2019-07-28T04:07:48.372' where key='surgery_pac_last_sync_transaction_time';
+update etl_concept set value='2019-07-28T04:07:48.372' where key='surgery_pac_last_sync_time';
+update etl_concept set value='0' where key='surgery_pac_last_sync_id';
+update etl_concept set value='2019-07-28T04:07:48.372' where key='surgery_detail_last_sync_transaction_time';
+update etl_concept set value='2019-07-28T04:07:48.372' where key='surgery_detail_last_sync_time';
+update etl_concept set value='0' where key='surgery_detail_last_sync_id';
+update etl_concept set value='2019-07-28T04:07:48.372' where key='surgery_billing_last_sync_transaction_time';
+update etl_concept set value='2019-07-28T04:07:48.372' where key='surgery_billing_last_sync_time';
+update etl_concept set value='0' where key='surgery_billing_last_sync_id';
+
+update etl_concept set value='2000-08-17T04:07:48.372' where key='patient_admission_last_sync_transaction_time';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='patient_admission_last_sync_time';
+update etl_concept set value='0' where key='patient_admission_last_sync_id';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='surgery_detail_last_sync_transaction_time';
+update etl_concept set value='2000-08-17T04:07:48.372' where key='surgery_detail_last_sync_time';
+update etl_concept set value='0' where key='surgery_detail_last_sync_id';
+
+SELECT * from surgery_list_report_temp;
+
+select surgery_priority from etl_ot_request;
+
+select * from surgery_list_report;
+select * from surgery_completion_report 
+
+
+
+UPDATE Table1 SET col2 = CASE col2 WHEN 0 THEN 1 WHEN 1 THEN 0 ELSE col2 END;
+UPDATE Table1 SET col2 = (col2 ^ 1);
+UPDATE Table1 SET col2 = 1 - col2;
+UPDATE Table1 SET col2 = ~col2;
+UPDATE Table1 SET col= (col-1)* -1;
+
+select 
+lag(document_id)  over (partition by admission_no order by stay_from_date asc,document_id asc) as prev_id,
+document_id,admission_no,stay_from_date,patient_mrn,admission_ward_code,admission_ward_name,bed_number,
+stay_to_date,total_duration,shifted_to_ward_code,shifted_to_ward_name,shifted_to_bed_no,created_date,
+source_document_type,source_code,process_flag,tariff_class_code,admission_status,admission_id
+from etl_bed_stay ebs 
+where patient_mrn = '17510000174976' and document_id != 655
+order by admission_no asc,stay_from_date asc,document_id asc;
+
+
+for running update or insert statements
+psql -h 172.23.29.4 -d insight_db -U periyaswami -p 5432 -a -q -f /home/vagrant/sql1.sql
+
+for taking backup
+pg_dump -h 172.23.25.5 -d insight_db_dev -U postgres -p 5432 -a --column-inserts --data-only --table=etl_service_order > my_dump.sql
+
+
+SELECT COUNT(*) FROM service_master;
+SELECT COUNT(*) FROM package_master;
+SELECT COUNT(*) FROM plan ;
+
+SELECT seq.i AS missing_service_codes
+FROM generate_series(1,12287) seq(i)
+WHERE NOT EXISTS (SELECT REPLACE (code, 'SVC', '') FROM service_master where code like 'SVC%' and REPLACE (code, 'SVC', '')::bigint = seq.i);
+
+SELECT seq.i AS missing_package_codes
+FROM generate_series(1,17664) seq(i)
+WHERE NOT EXISTS (SELECT REPLACE (code, 'PKG', '') FROM package_master where code like 'PKG%' and REPLACE (code, 'PKG', '')::bigint = seq.i);
+
+
+SELECT seq.i AS missing_plan_codes
+FROM generate_series(1,1681) seq(i)
+WHERE NOT EXISTS (SELECT REPLACE (code, 'PLN', '') FROM plan where code like 'PLN%' and REPLACE (code, 'PLN', '')::bigint = seq.i);
+
+SELECT REPLACE (code, 'PLN', '')::bigint FROM plan order by 1 desc limit 8
+
+SELECT 
+position('om' in 'Thomasreddy'),
+overlay('Thomasreddy' placing 'hom' from position('om' in 'Thomasreddy')-1 for 4),
+overlay('Thomasreddy' placing 'hom' from 2 for 4),
+substring('Thomasreddy' from 2 for 3),
+substring('Thomasreddy' from '....$'),
+substring('reddyThomasa' from '%$"o_a$"__' for '$'),
+substring('reddyThomasareddy' from '%#"o_a#"_%' for '#'),
+trim('xTomx x '),
+trim(both 'x' from 'xTomxx'),
+btrim('xyxtrimyyx', 'xy'),
+concat('abcde', 2, NULL, 22)	,
+'abc' ~ 'abc',
+'abc' ~ '^a'     ,
+'abc' ~ '(a|d)'  ,
+'abc' ~ '^(b|c)' 

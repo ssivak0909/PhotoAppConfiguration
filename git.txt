@@ -7,4 +7,5 @@ git log
 git diff           //diff btw local repo and working directory
 git diff --staged //diff btw local repo and working directory
 
-if you delete using OS ,then the changes in working dir(git status will show red color)
+//if you delete using OS ,then the changes in working dir(git status will show red color)
+git rm <filename> //if you delete using GIT,then the changes in staging area(git status will show green color)

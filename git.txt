@@ -152,6 +152,14 @@ $ subl ~/.gitconfig
 Specific File : temp6.txt
 File Pattern : *.txt
 Folder : Resources
+#add required file to .gitignore
+$subl .gitignore
+#add file_name(if file_name has extension add ext also, if not don't add), save changes and close sublime
+#now check .gitignore is added to the your working directory, and check git showing that file name in git changes(either in working dir or staging area) or not,
+ if not means , git added it to the .githidden
+$ ls -la (it displays .gitignore)
+$ git status -s (it displays .gitignore but it doesn't display the added file name)
+#now commit the changes
 
 #To Rename using OS
 $ mv old_name new_name

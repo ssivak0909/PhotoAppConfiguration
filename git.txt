@@ -99,8 +99,80 @@ dev$ git reset Head~
 dev$ git status -s
 #Now 6th and 7th will move to working dir
 
-#To Rename
-$ mv old_name new_name
+#To know about a git command
+$ git help log
+$ git help log > temp18
 
-#To remove a dir
+
+
+#Command to verify last commits
+$ git log
+
+# it will display 
+commit commit-hash
+Author name
+Date
+commit messgae
+
+#Get git abbrev Commit Hash
+$ git log --abbrev-log
+
+#if we want in more informative way
+$ git log --oneline --graph --decorate
+--oneline : oneline message
+--graph : if we have more than one branch, it will show the entire pictorial information, 
+          from wch branch to wch branch commit is being proessed and merge from wch branch to branch
+          it will show evrything
+--decorate : decorate to the particular pattern
+
+#search commits date wise
+$ git log --since="2 days ago"
+$ git log --since="10hours ago"
+
+#search commits for a particular file 
+$ git log -- git.txt
+#search commits for a particular file and time
+git log --since="9 hours ago" --oneline -- git.txt
+
+#Get the details of any commit
+$ git show <commit-hash>
+Ex: git show b8718289bf7242c38d293502997a8d3d4f00bfb3
+    git show b871828
+
+#GIT Alias : Long command , shorter way
+#To create alias ,add alias at global config
+$ git config --global alias.history "log --all --oneline --graph --decorate -- git.txt"
+#Now onwards we can use 
+$ git history (instead of git log --all --oneline --graph --decorate -- git.txt)
+#if we want we can edit this alias
+$ subl ~/.gitconfig
+
+#If we dont want to add any file to repository, then we should configure it in .githidden file 
+#GIT ignore pattern example
+Specific File : temp6.txt
+File Pattern : *.txt
+Folder : Resources
+
+#To Rename using OS
+$ mv old_name new_name
+$ git add.
+after adding only it will be in staging area.
+
+#Rename using GIT
+$ git mv old_name new_name
+#here not required to add to staging area, if we use git, changes bydefault wll be in staging area
+
+#move files to a sub directory
+$ mv *_expenses budget
+
+#To remove a file using OS
 $ rm -rf file_name
+
+#To remove a file using GIT
+$ git rm -rf file_name
+
+#Copy file to directory using OS
+$ cp file_name directory_name
+
+#Copy file to directory using GIT
+$ git cp file_name directory_name

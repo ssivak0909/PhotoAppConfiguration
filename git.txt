@@ -57,7 +57,7 @@ $ git pull origin master
 #now again list out the files with ls command , you can see that temp3 file
 $ ls
 
-#move a file back from staging area to Working directory
+#Move a file back from staging area to Working directory
 #create a new file temp4.txt
 $ git status -s
 (red color means working)
@@ -66,5 +66,20 @@ $ git status -s
 (green color means staging)
 # now we want to reset back
 $ git reset HEAD temp4.txt 
+$ git status -s
+(now again it is in red color which means working)
+
+#Move a file back from Local Repo to Working directory
+#create a new file temp5.txt
+$ git status -s
+(red color means working)
+$ git add .
+$ git status -s
+(green color means staging)
+$ git commit -m "added 5th temperory file"
+$ git status -s
+No changes
+# now we want to reset the file back to working dir
+$ git reset HEAD~ 
 $ git status -s
 (now again it is in red color which means working)

@@ -39,3 +39,20 @@ $ git checkout master
 2) merge using the following command
 $ git merge dev
 
+# create 3rd branch test
+ $ git branch test (from master)
+#now goto dev branch and add new file temp3, commit , push and merge in master branch
+$ git checkout dev
+#create new file temp3.txt
+$ git add .
+$ git commit -m "added 3rd temperory file"
+$ git push origin dev
+$ git checkout master
+$ git merge dev
+#now goto test branch and type ls
+$ git checkout test
+$ ls
+#here, you can't find temp3 file bcz branch is created bf4 adding temp3 file, so you should pull it from either master or dev branch
+$ git pull origin master
+#now again list out the files with ls command , you can see that temp3 file
+$ lss

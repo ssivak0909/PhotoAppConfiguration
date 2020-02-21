@@ -9,3 +9,24 @@ git diff --staged //diff btw local repo and working directory
 
 //if you delete using OS ,then the changes in working dir(git status will show red color)
 git rm <filename> //if you delete using GIT,then the changes in staging area(git status will show green color)
+
+//GIT-HUB
+1.create repository
+2.create folder with same name and initialize the folder with 
+$ git init
+3.now sync the folder with git repo using following command(go to that folder and run the command)
+$ git remote add origin <url>
+Ex.:$ git remote add origin git@github.com:ssivak0909/Extra.git
+4.if folder is empty then give
+      $ git pull origin master
+  if not empty
+      $ git pull origin master --allow-unrelated-histories
+5.then push
+
+#Create Branch
+ $ git branch dev
+#To list out all the branches in a repo
+ $ git branch
+#to change the branch
+ $ git checkout dev
+

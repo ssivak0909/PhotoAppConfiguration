@@ -98,3 +98,9 @@ dev$ git add.
 dev$ git reset Head~
 dev$ git status -s
 #Now 6th and 7th will move to working dir
+
+#To Rename
+$ mv old_name new_name
+
+#To remove a dir
+$ rm -rf file_name

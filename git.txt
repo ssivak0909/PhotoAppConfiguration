@@ -29,4 +29,7 @@ Ex.:$ git remote add origin git@github.com:ssivak0909/Extra.git
  $ git branch
 #to change the branch
  $ git checkout dev
+#Modify and push
+ $ git push origin dev
+
 

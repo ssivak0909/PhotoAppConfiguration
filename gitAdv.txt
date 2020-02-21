@@ -1,0 +1,37 @@
+git diff HEAD - Shows what has changed since the last commit.
+git diff HEAD^ - Shows what has changed since the commit before the latest commit.
+git diff --cached - Show what has been added to the index via git add but not yet committed.
+git diff - Show what has changed but hasn't been added to the index yet via git add.
+
+It looks like this:
+
+     Working
+    Directory  <----+--------+------+
+        |           |        |      |    
+        |           |        |      |
+        V           |        |      |    
+    "git add"       |        |      |    
+        |         diff       |      |    
+        |           |        |      |    
+        V           |    diff HEAD  | 
+     Staging	    |	     |	    |   
+      Area     <----+        |	    |            
+        |           |        |      |       
+        |           |        |      |
+        V           |        |      |       
+  "git commit"      |        |      |
+	|	    |	     |	    |
+        |     diff --cached  |      |
+        |     diff --staged  |      |
+	|	    |	     |      |
+	|	    |	     |	    |
+        V           |        |      |
+      HEAD     <----+--------+      |
+        |                           |
+        |                        diff HEAD^
+        V                           |
+previous "git commit"               |
+        |                           |
+        |                           |
+        V                           |
+      HEAD^    <--------------------+

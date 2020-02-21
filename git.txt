@@ -1,0 +1,6 @@
+git log
+git diff           //diff btw local repo and working directory
+git diff --staged //diff btw local repo and working directory
+git config --global core.editor "subl -n -w"
+git config --global core.username "subl"
+git config --global core.email "subl@gmail.com"

@@ -33,3 +33,9 @@ Ex.:$ git remote add origin git@github.com:ssivak0909/Extra.git
  $ git push origin dev
 
 
+#Merger dev branch into master
+1) goto target branch
+$ git checkout master
+2) merge using the following command
+$ git merge dev
+

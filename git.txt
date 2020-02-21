@@ -83,3 +83,18 @@ No changes
 $ git reset HEAD~ 
 $ git status -s
 (now again it is in red color which means working)
+
+Note: 1 file in staging area and 2nd  file in local repo, Now, if you give 
+$ git reset Head~
+# then both files will move to working dir
+Ex.: dev$ touch temp6
+dev$ echo "This is the 6th temp file" > temp6
+dev$ git add.
+dev$ git commit -m "added 6th temp file"
+dev$ touch temp7
+dev$ echo "This is the 6th temp file" > temp7
+dev$ git add.
+# Now 6th in local repo and 7th in staging area
+dev$ git reset Head~
+dev$ git status -s
+#Now 6th and 7th will move to working dir

@@ -16,7 +16,7 @@ git rm <filename> //if you delete using GIT,then the changes in staging area(git
 
 //GIT-HUB
 1.create repository
-2.create folder with same name and initialize the folder with 
+2.create folder with same name and initialize the folder with  
 $ git init
 3.now sync the folder with git repo using following command(go to that folder and run the command)
 $ git remote add origin <url>

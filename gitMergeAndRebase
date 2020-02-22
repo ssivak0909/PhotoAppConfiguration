@@ -1,0 +1,9 @@
+dev$ git merge master -m "merging from master"
+#on top of all dev committs, it will add master's commits
+# Ex:  1st u change temp9 file and commit in master branch
+# and you come to dev branch and change temp6 file (change some file and commit) and commit into dev branch
+#now run this command 
+dev$ git merge master -m "merging from master"
+#and check logs 
+dev$ git log --oneline --graph    
+#it will display master commits on top of dev's commits even though, you 1st committed changes in master 

@@ -43,11 +43,12 @@ $ git branch -d develop
 (bf4 deleting a branch, we shd move to another branch. we can't delete the branch which we are currently on)
 
 
-#Merger dev branch into master
+#Merge dev branch into master
 1) goto target branch
 $ git checkout master
 2) merge using the following command
 $ git merge dev
+$ git merge dev -m "merging dev branch"     
 
 # create 3rd branch test
  $ git branch test (from master)

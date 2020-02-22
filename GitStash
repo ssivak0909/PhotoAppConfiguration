@@ -35,3 +35,13 @@ $ git stash show stash@{0}
 
 Apply specific stash
 $ git stash apply stash@{0}
+
+Drop Specific stash
+$ git stash drop stash@{0}
+
+To clear all stashes 
+$ git stash clear
+
+
+we can revert the stash changes into new branch
+$ git stash branch newbranch

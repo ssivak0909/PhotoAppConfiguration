@@ -42,6 +42,5 @@ $ git stash drop stash@{0}
 To clear all stashes 
 $ git stash clear
 
-
 we can revert the stash changes into new branch
 $ git stash branch newbranch

@@ -1,0 +1,15 @@
+Options are similar to those for the mv command:
+
+-i  for interactive, asks you to confirm if an existing file (perhaps a version of joe_expenses already exists in the cashflow directory) should be over written in the copying process.
+
+-r for recursive, to copy all the subdirectories and files in a given directory and preserve the tree structure.
+
+-v for verbose, shows files being copied one by one. For example:
+
+-f for force, overrides all interactivity and executes the mv instruction without returning any prompts. (You must be sure your instruction is exactly what you want if you decide to apply the -f option.)
+
+mv joe_expenses JOE1_expenses
+
+In this case, if JOE1_expenses does not exist, it will be created with the exact content of joe_expenses, and joe_expenses will disappear.
+
+If JOE1_expenses already exists, its content will be replaced with that of joe_expenses (and joe_expenses will still disappear).

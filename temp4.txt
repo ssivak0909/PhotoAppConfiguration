@@ -1,0 +1,58 @@
+git config --global core.editor "subl -n -w"
+git config --global core.username "subl"
+git config --global core.email "subl@gmail.com"
+
+git status -s
+git log
+git diff           //diff btw local repo and working directory
+git diff --staged //diff btw local repo and working directory
+
+//if you delete using OS ,then the changes in working dir(git status will show red color)
+git rm <filename> //if you delete using GIT,then the changes in staging area(git status will show green color)
+
+//GIT-HUB
+1.create repository
+2.create folder with same name and initialize the folder with 
+$ git init
+3.now sync the folder with git repo using following command(go to that folder and run the command)
+$ git remote add origin <url>
+Ex.:$ git remote add origin git@github.com:ssivak0909/Extra.git
+4.if folder is empty then give
+      $ git pull origin master
+  if not empty
+      $ git pull origin master --allow-unrelated-histories
+5.then push
+
+#Create Branch
+ $ git branch dev
+#To list out all the branches in a repo
+ $ git branch
+#to change the branch
+ $ git checkout dev
+#Modify and push
+ $ git push origin dev
+
+
+#Merger dev branch into master
+1) goto target branch
+$ git checkout master
+2) merge using the following command
+$ git merge dev
+
+# create 3rd branch test
+ $ git branch test (from master)
+#now goto dev branch and add new file temp3, commit , push and merge in master branch
+$ git checkout dev
+#create new file temp3.txt
+$ git add .
+$ git commit -m "added 3rd temperory file"
+$ git push origin dev
+$ git checkout master
+$ git merge dev
+#now goto test branch and type ls
+$ git checkout test
+$ ls
+#here, you can't find temp3 file bcz branch is created bf4 adding temp3 file, so you should pull it from either master or dev branch
+$ git pull origin master
+#now again list out the files with ls command , you can see that temp3 file
+$ lss

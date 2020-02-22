@@ -1,18 +1,22 @@
 git config --global core.editor "subl -n -w"
-git config --global core.username "subl"
-git config --global core.email "subl@gmail.com"
+git config --global user.name "Your Name"
+git config --global user.email you@example.com
+
 
 git status -s
 git log
 git diff           //diff btw local repo and working directory
-git diff --staged //diff btw local repo and working directory
+git diff --staged  //diff btw local repo and working directory
+git diff git.txt
+git diff b871828 7cbfa49 //diff btw two commits
+git diff HEAD HEAD^ //diff btw last commit and bf4 last commit
 
 //if you delete using OS ,then the changes in working dir(git status will show red color)
 git rm <filename> //if you delete using GIT,then the changes in staging area(git status will show green color)
 
 //GIT-HUB
 1.create repository
-2.create folder with same name and initialize the folder with 
+2.create folder with same name and initialize the folder with  
 $ git init
 3.now sync the folder with git repo using following command(go to that folder and run the command)
 $ git remote add origin <url>
@@ -26,11 +30,17 @@ Ex.:$ git remote add origin git@github.com:ssivak0909/Extra.git
 #Create Branch
  $ git branch dev
 #To list out all the branches in a repo
- $ git branch
+ $ git branch //will show local branches only
+ $ git branch -a  //will show remote branches also
 #to change the branch
  $ git checkout dev
 #Modify and push
  $ git push origin dev
+#Rename the branch
+$ git branch -m dev develop
+#Delete a branch
+$ git branch -d develop
+(bf4 deleting a branch, we shd move to another branch. we can't delete the branch which we are currently on)
 
 
 #Merger dev branch into master
@@ -55,4 +65,132 @@ $ ls
 #here, you can't find temp3 file bcz branch is created bf4 adding temp3 file, so you should pull it from either master or dev branch
 $ git pull origin master
 #now again list out the files with ls command , you can see that temp3 file
-$ lss
+$ ls
+
+#Move a file back from staging area to Working directory
+#create a new file temp4.txt
+$ git status -s
+(red color means working)
+$ git add .
+$ git status -s
+(green color means staging)
+# now we want to reset back
+$ git reset HEAD temp4.txt 
+$ git status -s
+(now again it is in red color which means working)
+
+#Move a file back from Local Repo to Working directory
+#create a new file temp5.txt
+$ git status -s
+(red color means working)
+$ git add .
+$ git status -s
+(green color means staging)
+$ git commit -m "added 5th temperory file"
+$ git status -s
+No changes
+# now we want to reset the file back to working dir
+$ git reset HEAD~ 
+$ git status -s
+(now again it is in red color which means working)
+
+Note: 1 file in staging area and 2nd  file in local repo, Now, if you give 
+$ git reset Head~
+# then both files will move to working dir
+Ex.: dev$ touch temp6
+dev$ echo "This is the 6th temp file" > temp6
+dev$ git add.
+dev$ git commit -m "added 6th temp file"
+dev$ touch temp7
+dev$ echo "This is the 6th temp file" > temp7
+dev$ git add.
+# Now 6th in local repo and 7th in staging area
+dev$ git reset Head~
+dev$ git status -s
+#Now 6th and 7th will move to working dir
+
+#To know about a git command
+$ git help log
+$ git help log > temp18
+
+
+
+#Command to verify last commits
+$ git log
+
+# it will display 
+commit commit-hash
+Author name
+Date
+commit messgae
+
+#Get git abbrev Commit Hash
+$ git log --abbrev-log
+
+#if we want in more informative way
+$ git log --oneline --graph --decorate
+--oneline : oneline message
+--graph : if we have more than one branch, it will show the entire pictorial information, 
+          from wch branch to wch branch commit is being proessed and merge from wch branch to branch
+          it will show evrything
+--decorate : decorate to the particular pattern
+
+#search commits date wise
+$ git log --since="2 days ago"
+$ git log --since="10hours ago"
+
+#search commits for a particular file 
+$ git log -- git.txt
+#search commits for a particular file and time
+git log --since="9 hours ago" --oneline -- git.txt
+
+#Get the details of any commit
+$ git show <commit-hash>
+Ex: git show b8718289bf7242c38d293502997a8d3d4f00bfb3
+    git show b871828
+
+#GIT Alias : Long command , shorter way
+#To create alias ,add alias at global config
+$ git config --global alias.history "log --all --oneline --graph --decorate -- git.txt"
+#Now onwards we can use 
+$ git history (instead of git log --all --oneline --graph --decorate -- git.txt)
+#if we want we can edit this alias
+$ subl ~/.gitconfig
+
+#If we dont want to add any file to repository, then we should configure it in .githidden file 
+#GIT ignore pattern example
+Specific File : temp6.txt
+File Pattern : *.txt
+Folder : Resources
+#add required file to .gitignore
+$subl .gitignore
+#add file_name(if file_name has extension add ext also, if not don't add), save changes and close sublime
+#now check .gitignore is added to the your working directory, and check git showing that file name in git changes(either in working dir or staging area) or not,
+ if not means , git added it to the .githidden
+$ ls -la (it displays .gitignore)
+$ git status -s (it displays .gitignore but it doesn't display the added file name)
+#now commit the changes
+
+#To Rename using OS
+$ mv old_name new_name
+$ git add.
+after adding only it will be in staging area.
+
+#Rename using GIT
+$ git mv old_name new_name
+#here not required to add to staging area, if we use git, changes bydefault wll be in staging area
+
+#move files to a sub directory
+$ mv *_expenses budget
+
+#To remove a file using OS
+$ rm -rf file_name
+
+#To remove a file using GIT
+$ git rm -rf file_name
+
+#Copy file to directory using OS
+$ cp file_name directory_name
+
+#Copy file to directory using GIT
+$ git cp file_name directory_name

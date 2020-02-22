@@ -1,0 +1,20 @@
+This is the commit in which i added all the final changes
+Tags are ref's that point to specific points in git history. 
+Tagging is generally used to capture a point in history that is used for a marked version release(i.e. v1.0.1)
+Tag is used to highlight/label a particular commit
+
+Commands:
+git tag<tag_name>
+git tag --list
+git tag --delete <tag_name>
+
+#Annotated tag
+$ git tag -a <tag_name>
+(now it will ask tag message, so give something like "Release 1 code Freeze")
+To see Tag info
+$ git show <tag_name> (but this is applicable only for Annotated tags, it wont show any info for lightweight tags)
+
+#once you created atag , it will be automatically tagged to the latest (or last) commit
+why we use tags
+for ex , this week we committed version1.0 and next week we are going to commit version2.0
+if we attach tags to these committs we can easily comapare the changes btw those

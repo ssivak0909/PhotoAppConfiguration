@@ -32,3 +32,6 @@ $ git stash  save -u "Git Stash file writing"
 
 Find the changes done in specific stash
 $ git stash show stash@{0}
+
+Apply specific stash
+$ git stash apply stash@{0}

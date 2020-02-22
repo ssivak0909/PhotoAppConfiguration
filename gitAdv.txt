@@ -1,7 +1,10 @@
 git diff HEAD - Shows what has changed since the last commit.
+               (shows changes in the working directory since your last commit; what you would be committing if you run "git commit -a".)
 git diff HEAD^ - Shows what has changed since the commit before the latest commit.
 git diff --cached - Show what has been added to the index via git add but not yet committed.
-git diff - Show what has changed but hasn't been added to the index yet via git add.
+                   (or the synonym git diff --staged, will show you the difference between the index and your last commit; what you would be committing
+                    if you run "git commit" without the "-a" option)
+git diff - will show you changes in the working directory that are not yet staged for the next commit.
 
 It looks like this:
 

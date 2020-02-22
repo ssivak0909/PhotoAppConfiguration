@@ -1,11 +1,15 @@
 git config --global core.editor "subl -n -w"
-git config --global core.username "subl"
-git config --global core.email "subl@gmail.com"
+git config --global user.name "Your Name"
+git config --global user.email you@example.com
+
 
 git status -s
 git log
 git diff           //diff btw local repo and working directory
-git diff --staged //diff btw local repo and working directory
+git diff --staged  //diff btw local repo and working directory
+git diff git.txt
+git diff b871828 7cbfa49 //diff btw two commits
+git diff HEAD HEAD^ //diff btw last commit and bf4 last commit
 
 //if you delete using OS ,then the changes in working dir(git status will show red color)
 git rm <filename> //if you delete using GIT,then the changes in staging area(git status will show green color)
@@ -26,11 +30,17 @@ Ex.:$ git remote add origin git@github.com:ssivak0909/Extra.git
 #Create Branch
  $ git branch dev
 #To list out all the branches in a repo
- $ git branch
+ $ git branch //will show local branches only
+ $ git branch -a  //will show remote branches also
 #to change the branch
  $ git checkout dev
 #Modify and push
  $ git push origin dev
+#Rename the branch
+$ git branch -m dev develop
+#Delete a branch
+$ git branch -d develop
+(bf4 deleting a branch, we shd move to another branch. we can't delete the branch which we are currently on)
 
 
 #Merger dev branch into master

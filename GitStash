@@ -1,0 +1,34 @@
+Why Git stash
+It is used to save your uncommit changes so that u can work on something else and revert them from your working directory.
+
+$ git stash
+$ git stash list
+$ git stash apply
+$ git stash drop
+
+By default Git Stash will stash:
+1)Changes that have been added to Index (Staging Area)
+1)Changes made to files that are currently tracked by GIT (UnStaged Area)
+
+But Not stash:
+New files in working copy that have not yet been staged
+files that have been ignored.
+
+So, we can save untracked files also using 
+$ git stash -u
+
+we can save git ignored files also using
+$ git stash -a ( all files)
+
+If we stashed more than one time means
+list of stashes will be created like stash{0},stash{1},stash{2},.....
+stash{0} is the latest one
+we can pop changes one by one by using 
+$ git statsh pop
+if we use pop instead og apply, it will apply all changes and drop that particular stash.
+
+Stash with message
+$ git stash  save -u "Git Stash file writing"
+
+Find the changes done in specific stash
+$ git stash show stash@{0}

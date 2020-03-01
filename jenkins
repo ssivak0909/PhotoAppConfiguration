@@ -1,0 +1,24 @@
+sudo add-apt-repository ppa:webupd8team/java
+sudo apt-get update
+sudo apt install openjdk-8-jdk
+
+wget -q -O - http://pkg.jenkins-ci.org/debian/jenkins-ci.org.key | apt-key add - 
+echo deb http://pkg.jenkins-ci.org/debian binary/ > /etc/apt/sources.list.d/jenkins.list
+apt-get updat
+apt-get install jenkins
+
+Start Jenkins:
+systemctl start jenkins
+
+Check Status of Jenkins:
+systemctl status jenkins
+
+Stop Jenkins:
+systemctl stop jenkins
+
+Restart Jenkins:
+systemctl restart jenkins
+
+To show ip address in digiocean
+ip addr show
+

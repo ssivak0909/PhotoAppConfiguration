@@ -18,3 +18,8 @@ $ git show <tag_name> (but this is applicable only for Annotated tags, it wont s
 why we use tags
 for ex , this week we committed version1.0 and next week we are going to commit version2.0
 if we attach tags to these committs we can easily comapare the changes btw those
+
+# we can tag a tag_name to a specific commit
+$ git tag --delete <tag_name> <commit_id>
+$ git tag -a beta-0.0.9 71479ea
+

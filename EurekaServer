@@ -1,0 +1,15 @@
+https://www.baeldung.com/eureka-self-preservation-renewal
+https://dzone.com/articles/the-mystery-of-eurekas-self-preservation
+https://medium.com/@fahimfarookme/the-mystery-of-eureka-health-monitoring-5305e3beb6e9
+https://stackoverflow.com/questions/32616329/eureka-never-unregisters-a-service
+https://stackoverflow.com/questions/33921557/understanding-spring-cloud-eureka-server-self-preservation-and-renew-threshold
+https://stackoverflow.com/questions/39032741/what-does-renews-and-renews-threshold-mean-in-eureka
+
+eureka.client.healthcheck.enabled=true?
+eureka:
+  appInfo:
+    replicate:
+      interval: 3
+    initial:
+      replicate:
+        time: 3

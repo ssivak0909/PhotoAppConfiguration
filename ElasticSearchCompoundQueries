@@ -1,0 +1,68 @@
+GET twitter/_search
+{
+  "query": {
+    "bool": {
+      "must": [
+        {
+          "match": {
+            "login": "34035"
+          }
+        }
+      ],
+      "must_not": [
+        {
+          "match": {
+            "user": "Siva"
+          }
+        }
+      ],
+      "minimum_should_match": 1, 
+      "should": [
+        {
+          "range": {
+            "age": {
+              "gte": 40,
+              "lte": 60
+            }
+          }
+        }
+      ]
+    }
+  }
+}
+
+GET twitter/_search
+{
+  "query": {
+    "bool": {
+      "must": 
+        {
+          "match": {
+            "login": "34035"
+          }
+        },
+      "must_not": [
+        {
+          "match": {
+            "user": "Siva"
+          }
+        }
+      ],
+      "minimum_should_match": 1, 
+      "should": [
+        {
+          "match": {
+            "createdBy": "Raju"
+          }
+        },
+        {
+          "match": {
+            "createdBy": "Siva"
+          }
+        }
+      
+      ]
+      
+    }
+  }
+}

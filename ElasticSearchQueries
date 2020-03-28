@@ -1,0 +1,281 @@
+PUT /twitter
+{
+    "settings" : {
+        "index" : {
+            "number_of_shards" : 3, 
+            "number_of_replicas" : 2 
+        }
+    },
+    "mappings" : {
+        "properties" : {
+            "field1" : { "type" : "text" }
+        }
+    }
+}
+
+PUT twitter/_doc/1
+{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch"
+}
+
+PUT twitter/_doc/2
+{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch",
+    "login" : "34034"
+}
+
+POST twitter/_doc/3
+{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch",
+    "login" : "34035"
+}
+
+POST twitter/_doc/4
+{
+    "user" : "kimchy",
+    "post_date" : "2009-11-15T14:12:12",
+    "message" : "trying out Elasticsearch",
+    "login" : "34035",
+    "createdBy":"Siva"
+}
+
+GET twitter/_search
+
+POST _bulk
+{"index" : {"_index":"text1","_id":"1"}}
+{"field1":"value1"}
+{"delete" : {"_index":"text","_id":"1"}}
+{"create" : {"_index":"text2","_id":"3"}}
+{"field1":"value1"}
+{"update" : {"_id":"3","_index":"text"}}
+{"doc": {"field1" : "value2"}}
+
+GET twitter/_search?size=200
+GET _search?size=200
+GET _all/_search?size=200
+GET twitter/_search?size=200&q=user:*
+GET twitter/_search?size=200&q=user:kimchy
+GET twitter/_search?size=200&q=user:kimchy AND login:34034
+GET twitter/_search?size=200&q=(user:kimchy AND login:34034) OR createdBy:Siva
+
+DELETE text
+
+GET /_mget
+{
+  "docs" : [
+    {
+      "_index":"text1",
+      "_id":"1"
+    },
+    {
+      "_index":"text2",
+      "_id":"1"
+    }
+  ]
+}
+
+--bydefault OR operator it will use between the words this is a full text search query
+
+GET twitter/_search
+{
+  "query": {
+    "match": {
+      "login": "34035 34034"
+    }
+  }
+}
+
+GET twitter/_search
+{
+  "query": {
+    "match": {
+      "login": {
+      "query": "34035 34034",
+      "operator": "and"
+      }
+    }
+  }
+}
+
+
+POST twitter/_doc/5
+{
+    "user" : "siva",
+    "post_date" : "2009-10-15T14:12:12",
+    "message" : "trying out Elasticsearch long time",
+    "login" : "34036",
+    "createdBy":"Siva ","age":30
+}
+
+
+--this will try to match the entire phrase
+Retrieve all documents which matches a given phrase (whole text): Below query retrieves all documents where 'trying long' is found as whole.
+GET twitter/_search
+{
+  "query": {
+    "match_phrase": {
+      "message": "trying long"
+    }
+  }
+}
+
+
+--this will try to match the entire phrase,here we can give the distance between the by using slop
+GET twitter/_search
+{
+  "query": {
+    "match_phrase": {
+      "message": {
+        "query": "trying long",
+        "slop": 1
+      }
+    }
+  }
+}
+
+POST twitter/_doc/6
+{
+    "user" : "siva",
+    "post_date" : "2009-10-15T14:12:12",
+    "message" : "out Elasticsearch long time",
+    "login" : "34036",
+    "createdBy":"Siva ","age":30
+}
+
+
+
+--Retrieve all documents where message starts with "out" 
+GET twitter/_search
+{
+  "query": {
+    "match_phrase_prefix": {
+      "message": "out"
+    }
+  },
+  "size": 2,
+  "_source": "messag*"
+}
+
+-It will search in all fields like user,login,createdBy 
+GET twitter/_search
+{
+  "query": {
+    "query_string": {
+      "query": "trying"
+    }
+  }
+}
+
+GET twitter/_search
+{
+  "query": {
+    "query_string": {
+      "default_field": "message", 
+      "query": "Siva long",
+      "default_operator": "AND"
+    }
+  },
+  "size": 2,
+  "_source": "messag*"
+}
+
+
+GET twitter/_search
+{
+  "query": {
+    "query_string": {
+      "fields": ["message","user"], 
+      "query": "Siva long",
+      "default_operator": "AND"
+    }
+  },
+  "size": 2,
+  "_source": "messag*"
+}
+
+
+POST twitter/_doc/9
+{
+    "user" : "Siva",
+    "post_date" : "2009-10-15T14:12:12",
+    "message" : "trying out Elasticsearch long time by Ravi",
+    "login" : "34036",
+    "createdBy":"Siva ","age":30
+}
+
+
+GET twitter/_search
+{
+  "query": {
+    "terms": {
+    "user": [
+      "trying",
+      "siva"
+    ]
+  }
+  }
+}
+
+GET twitter/_search
+{
+  "query": {
+    "term": {
+      "message": {
+        "value": "out"
+      }
+    }
+  }
+}
+
+GET twitter/_search
+{
+  "query": {
+    "wildcard": {
+    "message": {
+      "value": "try*ng"
+    }
+  }
+  }
+}
+
+GET twitter/_search
+{
+  "query": {
+    "query_string": {
+      "fields": ["message","user"], 
+      "query": "Si*",
+      "default_operator": "AND"
+    }
+  },
+  "size": 2,
+  "_source": "messag*"
+}
+
+
+GET twitter/_search
+{
+  "query": {
+    "prefix": {
+      "message": {
+        "value": "out"
+      }
+    }
+  }
+}
+
+GET twitter/_search
+{
+  "query": {
+    "match_phrase_prefix": {
+      "message": {
+        "value": "out"
+      }
+    }
+  }
+}

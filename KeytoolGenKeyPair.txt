@@ -1,0 +1,6 @@
+keytool -genkeypair -alias apiEncryptionKey -keyalg RSA  -keysize 2048  \
+-dname "CN=Siva Krishna, OU=API Dev, O=sivatech.com, L=GODAVARI, ST=AP, C=IND" \
+ -keypass 123456 -keystore apiEncryptionKey.jks -storepass 123456
+
+
+keytool -importkeystore -srckeystore apiEncryptionKey.jks -destkeystore apiEncryptionKey.jks -deststoretype pkcs12

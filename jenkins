@@ -22,3 +22,75 @@ systemctl restart jenkins
 To show ip address in digiocean
 ip addr show
 
+To run Java prog from github, we should install git and maven in the host machine where jenkins is running
+(if we are running jenkins means java is alredy installed)
+
+we have to set up JAVA_HOME, GIT AND MAVEN_HOME  in Global Tool Configuration
+JAVA_HOME : /usr/lib/jvm/java-8-openjdk-amd64
+MAVEN_HOME : /usr/share/maven
+GIT : /usr/lib/git-core/git  (run the command to know the git.exe path $ git --exec-path)
+
+Git Username :ssivak0909
+tech.siva504@gmail.com
+4339@siva
+
+Jenkins:
+admin
+4339@Siva
+
+digiOcean
+tech.siva504@gmail.com
+4339@siva
+
+droplet
+➜  ~ ssh root@159.65.235.253
+4339@Siva
+
+
+Install Tomcat
+(https://linuxize.com/post/how-to-install-tomcat-8-5-on-ubuntu-18-04/)
+(https://linuxize.com/post/how-to-create-users-in-linux-using-the-useradd-command/)
+(*https://tomcat.apache.org/download-80.cgi)
+We will create a new system user and group with home directory /opt/tomcat which will run the Tomcat service:
+sudo useradd -m -U -d /opt/tomcat -s /bin/false tomcat
+
+sudo apt install unzip wget
+cd /tmproot@linux:/tmp# wget http://mirrors.estointernet.in/apache/tomcat/tomcat-8/v8.5.51/bin/apache-tomcat-8.5.51.zip
+
+root@linux:/tmp# unzip apache-tomcat-8.5.51.zip 
+root@linux:/tmp# sudo mkdir -p /opt/tomcat
+root@linux:/tmp# sudo mv apache-tomcat-8.5.51 /opt/tomcat/
+change port if you want
+/opt/tomcat/apache-tomcat-8.5.51/conf/server.xml
+vi server.xml
+press / (To search) and type connector and then press i (to come into insert mode) and change 8080 to 9090
+press esc and type :wq (To save)
+
+change permission of scripts 
+by default none of scripts have executable permission (only they have read an write permission)
+/opt/tomcat/apache-tomcat-8.5.51/bin (come to this location and check by typing ls -la)
+
+root@linux:/opt/tomcat/apache-tomcat-8.5.51/bin# sudo chmod +x *
+To start server 
+root@linux:/opt/tomcat/apache-tomcat-8.5.51/bin# ./startup.sh 
+
+ConfigureJenkins with tomcat for auto deployement of artifacts
+update 
+root@linux:/opt/tomcat/apache-tomcat-8.5.51/conf# vi tomcat-users.xml 
+
+ <role rolename="manager-script"/>
+  <role rolename="manager-gui"/>
+  <user username="tomcat" password="tomcat" roles="manager-script,manager-gui"/>
+</tomcat-users>
+
+and we should comment the following lines and following location
+cd /opt/tomcat/apache-tomcat-8.5.51/webapps/manager/META-INF
+vi context.xml
+
+	<!--  <Valve className="org.apache.catalina.valves.RemoteAddrValve"
+	 allow="127\.\d+\.\d+\.\d+|::1|0:0:0:0:0:0:0:1" /> -->
+  
+
+
+java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar
+/var/lib/jenkins/workspace/photo-app-discovery-service-proj/target/photo-app-discovery-service-0.0.1-SNAPSHOT.jar

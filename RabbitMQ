@@ -1,0 +1,63 @@
+
+sudo rabbitmqctl force_reset
+sudo rabbitmq-server or sudo service rabbitmq-server start(either 1st or 2nd , m also not sure)
+sudo /usr/sbin/rabbitmqctl status
+sudo rabbitmqctl start_app
+
+➜  ~ sudo rabbitmqctl report  
+➜  ~ sudo rabbitmqctl reset
+➜  ~ sudo rabbitmqctl force_reset
+➜  ~ sudo rabbitmqctl stop
+➜  ~ sudo rabbitmqctl start_app
+sudo service rabbitmq-server start
+sudo service rabbitmq-server stop
+sudo service rabbitmq-server status
+
+/etc/rabbitmq/rabbitmq-env.conf
+NODENAME=rabbit
+NODE_IP_ADDRESS=127.0.0.1
+NODE_PORT=5672
+
+HOME=/var/lib/rabbitmq
+LOG_BASE=/var/log/rabbitmq
+MNESIA_BASE=/var/lib/rabbitmq/mnesia
+
+
+
+sudo service rabbitmq-server restart
+remove /var/log/rabbitmq/* and start it back (this resets the node) .
+sudo rm -rf /var/log/rabbitmq/*
+
+https://stackoverflow.com/questions/10729348/how-to-restart-rabbitmq-service
+https://groups.google.com/forum/#!topic/rabbitmq-users/w0aJNmfz1N8
+
+Hello,
+After I did:
+ sudo rabbitmqctl stop -n rabbit@localhost
+I get:
+Stopping and halting node 'rabbit@anna-UBUNTU' ...
+Error: unable to connect to node 'rabbit@anna-UBUNTU': nodedown
+
+DIAGNOSTICS
+===========
+
+attempted to contact: ['rabbit@anna-UBUNTU']
+
+rabbit@anna-UBUNTU:
+  * connected to epmd (port 4369) on anna-UBUNTU
+  * epmd reports node 'rabbit' running on port 25672
+  * TCP connection succeeded but Erlang distribution failed
+  * suggestion: hostname mismatch?
+  * suggestion: is the cookie set correctly?
+
+current node details:
+- node name: 'rabbitmqctl-15054@anna-UBUNTU'
+- home dir: /var/lib/rabbitmq
+- cookie hash: aR7vw8lsorfooYS1FzpH6Q==
+
+How can I fix this problem ?
+
+You've stopped RabbitMQ (without stopping the VM). So it's natural that rabbitmqctl reports
+that it is down.
+
+Use rabbitmqctl start_app [-n rabbit@hostname] to start it.

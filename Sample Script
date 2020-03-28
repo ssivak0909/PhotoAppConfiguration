@@ -1,0 +1,10 @@
+#!/bin/bash
+for a in 1 2 3 4 5 6 7 8 9 10
+do
+if [ $a == 5 ];
+then
+ sleep 20 #Go to next iteration of I in the loop and skip statements3
+fi
+echo "Iteration number $a"
+done
+java -Xdebug -Xrunjdwp:server=y,transport=dt_socket,address=8000,suspend=n -jar /var/lib/jenkins/workspace/photo-app-discovery-service-proj/target/photo-app-discovery-service-0.0.1-SNAPSHOT.jar
